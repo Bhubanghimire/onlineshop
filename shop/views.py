@@ -8,22 +8,22 @@ def product_list(request,category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
-
+    print(category_slug)
     if category_slug:
-        category = Category.objects.all()
-        products = products.objects.filter(slug=category_slug)
+        category = get_object_or_404(Category, slug=category_slug)
+        products = Product.objects.filter(slug=category)
 
-
+    
     context = {
         'category': category,
         'categories':categories,
-        'Product':products,
+        'products':products,
     }
-
+    # print(products)
     return render(request,'shop/product/list.html',context)
 
 
 def product_detail(request,id,slug):
-    product = get_object_or_404(slug=slug,id=id)
+    product = get_object_or_404(Product, slug=slug,id=id,available=True)
 
     return render(request,'shop/product/detail.html',{'product':product})
