@@ -1,17 +1,17 @@
 from shop.models import Category
 from django.http import request
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,get_object_or_404
 from .models import Category, Product
 
 # Create your views here.
 def product_list(request,category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+    products= Product.objects.filter(available=True)
     print(category_slug)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(slug=category)
+        products = products.filter(category=category)
 
     
     context = {
