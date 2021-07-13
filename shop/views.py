@@ -20,8 +20,10 @@ def product_list(request,category_slug=None):
         'Product':products,
     }
 
-    return render(request,'index.html',context)
+    return render(request,'shop/product/list.html',context)
 
 
 def product_detail(request,id,slug):
     product = get_object_or_404(slug=slug,id=id)
+
+    return render(request,'shop/product/detail.html',{'product':product})
