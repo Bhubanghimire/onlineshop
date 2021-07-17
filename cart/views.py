@@ -4,6 +4,8 @@ from django.views.decorators.http import require_POST
 from .cart import Cart
 from .forms import CartAddProductForm
 from shop.models import Product
+from shop.recommender import Recommender
+
 
 # Create your views here.
 @require_POST
